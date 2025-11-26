@@ -11,6 +11,14 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">1234</property>
         
+        
+        
+        
+        
+        
+        
+        
+        
         <!-- JDBC connection pool settings -->
         <property name="hibernate.connection.pool_size">10</property>
         
