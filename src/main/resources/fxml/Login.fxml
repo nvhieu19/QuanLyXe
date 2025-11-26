@@ -5,71 +5,92 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="600.0" prefWidth="900.0" styleClass="login-background" 
-           xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" 
-           fx:controller="com.fucar.controller.LoginController">
+<HBox prefHeight="800.0" prefWidth="1200.0" styleClass="login-main"
+      xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.fucar.controller.LoginController"
+      stylesheets="@../css/style.css">
     
-    <VBox alignment="CENTER" maxHeight="550.0" maxWidth="450.0" spacing="25.0" 
-          styleClass="login-container">
-        
+    <!-- LEFT PANEL - Info Section -->
+    <VBox HBox.hgrow="ALWAYS" alignment="TOP_LEFT" styleClass="login-left-panel" spacing="30.0">
         <padding>
-            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0"/>
+            <Insets top="80.0" left="60.0" right="40.0"/>
         </padding>
         
-        <VBox alignment="CENTER" spacing="10.0">
-            <Label styleClass="login-title" text="🚗 FU Car Renting">
-                <font>
-                    <Font name="System Bold" size="32.0"/>
-                </font>
-            </Label>
-            <Label styleClass="login-subtitle" text="Hệ thống Quản lý Thuê xe">
-                <font>
-                    <Font size="16.0"/>
-                </font>
-            </Label>
+        <!-- Logo and Title -->
+        <VBox spacing="15.0">
+
+            <Label text="HỆ THỐNG QUẢN LÝ THUÊ XE" styleClass="login-left-title"/>
         </VBox>
         
-        <VBox spacing="20.0">
-            <VBox spacing="8.0">
-                <Label text="Tên đăng nhập" styleClass="input-label">
-                    <font><Font size="14.0" name="System Bold"/></font>
-                </Label>
-                <TextField fx:id="txtAccountName" promptText="Nhập tên đăng nhập" 
-                           styleClass="modern-input" prefHeight="45.0">
+        <!-- Description -->
+        <Label text="Quản lý toàn bộ hoạt động thuê xe, khách hàng, giao dịch và báo cáo một cách hiệu quả"
+               styleClass="login-left-desc" wrapText="true" maxWidth="350.0"/>
+        
+        <!-- Features -->
+        <VBox styleClass="login-features-box" spacing="12.0">
+            <Label text="✅ Quản lý Xe" styleClass="login-feature-item"/>
+            <Label text="✅ Quản lý Khách hàng" styleClass="login-feature-item"/>
+            <Label text="✅ Quản lý Giao dịch" styleClass="login-feature-item"/>
+            <Label text="✅ Báo cáo &amp; Thống kê" styleClass="login-feature-item"/>
+        </VBox>
+        
+        <!-- Spacer -->
+        <Region VBox.vgrow="ALWAYS"/>
+        
+
+    </VBox>
+    
+    <!-- RIGHT PANEL - Login Form Section -->
+    <VBox HBox.hgrow="ALWAYS" alignment="CENTER" styleClass="login-right-panel" spacing="30.0">
+        <padding>
+            <Insets left="40.0" right="60.0" top="60.0" bottom="60.0"/>
+        </padding>
+        
+        <!-- Form Title -->
+        <VBox spacing="8.0" alignment="CENTER_LEFT">
+            <Label text="Đăng Nhập" styleClass="login-form-title"/>
+            <Label text="Nhập thông tin tài khoản của bạn" styleClass="login-form-subtitle"/>
+        </VBox>
+        
+        <!-- Error Label -->
+        <Label fx:id="lblError" styleClass="login-error-msg" visible="false" wrapText="true" managed="false"/>
+        
+        <!-- Form Fields -->
+        <VBox spacing="24.0">
+            <!-- Username Field -->
+            <VBox styleClass="login-input-wrapper">
+                <Label text="👤 Tên đăng nhập" styleClass="login-input-label"/>
+                <TextField fx:id="txtAccountName" 
+                           promptText="Nhập tên đăng nhập" 
+                           styleClass="login-input-field"
+                           prefHeight="48.0">
                     <font><Font size="14.0"/></font>
                 </TextField>
             </VBox>
             
-            <VBox spacing="8.0">
-                <Label text="Mật khẩu" styleClass="input-label">
-                    <font><Font size="14.0" name="System Bold"/></font>
-                </Label>
-                <PasswordField fx:id="txtPassword" promptText="Nhập mật khẩu" 
-                               styleClass="modern-input" prefHeight="45.0">
+            <!-- Password Field -->
+            <VBox styleClass="login-input-wrapper">
+                <Label text="🔐 Mật khẩu" styleClass="login-input-label"/>
+                <PasswordField fx:id="txtPassword" 
+                               promptText="Nhập mật khẩu" 
+                               styleClass="login-input-field"
+                               prefHeight="48.0">
                     <font><Font size="14.0"/></font>
                 </PasswordField>
             </VBox>
-            
-            <Label fx:id="lblError" styleClass="error-label" visible="false" wrapText="true">
-                <font><Font size="13.0"/></font>
-            </Label>
         </VBox>
         
-        <Button fx:id="btnLogin" onAction="#handleLogin" 
-                prefHeight="50.0" prefWidth="300.0" styleClass="login-button" text="ĐĂNG NHẬP">
+        <!-- Login Button -->
+        <Button fx:id="btnLogin" 
+                text="ĐĂNG NHẬP"
+                onAction="#handleLogin"
+                styleClass="login-submit-btn"
+                prefHeight="50.0"
+                maxWidth="1.7976931348623157E308">
             <font><Font name="System Bold" size="15.0"/></font>
         </Button>
         
-        <VBox alignment="CENTER" spacing="8.0" styleClass="demo-info">
-            <!-- <Label text="📌 Tài khoản demo:" styleClass="demo-title">
-                <font><Font name="System Bold" size="13.0"/></font>
-            </Label>
-            <Label text="Admin: admin01 / admin123" styleClass="demo-text">
-                <font><Font size="12.0"/></font>
-            </Label>
-            <Label text="Customer: customer01 / cust123" styleClass="demo-text">
-                <font><Font size="12.0"/></font>
-            </Label> -->
-        </VBox>
+
+        
     </VBox>
-</StackPane>
+</HBox>
