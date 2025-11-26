@@ -81,15 +81,15 @@
                             </columnConstraints>
                             
                             <Label text="Hãng:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                            <TextField fx:id="txtProducerName" promptText="VD: Toyota" GridPane.rowIndex="0" GridPane.columnIndex="1"
+                            <TextField fx:id="txtProducerName" promptText="VD: BMW" GridPane.rowIndex="0" GridPane.columnIndex="1"
                                        style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #f9fafb; -fx-border-color: #e5e7eb;"/>
                             
                             <Label text="Địa chỉ:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                            <TextField fx:id="txtProducerAddress" promptText="VD: Japan" GridPane.rowIndex="1" GridPane.columnIndex="1"
+                            <TextField fx:id="txtProducerAddress" promptText="VD: Korea" GridPane.rowIndex="1" GridPane.columnIndex="1"
                                        style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #f9fafb; -fx-border-color: #e5e7eb;"/>
                             
                             <Label text="Quốc gia:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                            <TextField fx:id="txtProducerCountry" promptText="VD: Nhật Bản" GridPane.rowIndex="2" GridPane.columnIndex="1"
+                            <TextField fx:id="txtProducerCountry" promptText="VD: Hàn Quốc" GridPane.rowIndex="2" GridPane.columnIndex="1"
                                        style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #f9fafb; -fx-border-color: #e5e7eb;"/>
                             
                             <Label text="Ngày nhập:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
