@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="650.0" prefWidth="1350.0" styleClass="content-pane"
+            xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" 
+            fx:controller="com.fucar.controller.ReportController">
+    
+    <top>
+        <VBox spacing="15.0">
+            <padding>
+                <Insets bottom="15.0" left="20.0" right="20.0" top="15.0"/>
+            </padding>
+            
+            <!-- Header -->
+            <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="page-header">
+                <Label styleClass="page-title" text="Báo cáo Giao dịch">
+                    <font><Font name="System Bold" size="20.0"/></font>
+                </Label>
+                
+                <Region HBox.hgrow="ALWAYS"/>
+                
+                <Button fx:id="btnExport" onAction="#handleExport" styleClass="export-button" text="📥 XUẤT FILE">
+                    <font><Font name="System Bold" size="13.0"/></font>
+                </Button>
+            </HBox>
+            
+            <!-- Filter Section -->
+            <HBox spacing="15.0" alignment="CENTER_LEFT" styleClass="filter-bar">
+                <padding>
+                    <Insets bottom="15.0" left="10.0" right="10.0" top="15.0"/>
+                </padding>
+                
+                <VBox spacing="5.0">
+                    <Label text="Từ ngày:">
+                        <font><Font name="System Bold" size="12.0"/></font>
+                    </Label>
+                    <DatePicker fx:id="dpStartDate" prefWidth="150.0"/>
+                </VBox>
+                
+                <VBox spacing="5.0">
+                    <Label text="Đến ngày:">
+                        <font><Font name="System Bold" size="12.0"/></font>
+                    </Label>
+                    <DatePicker fx:id="dpEndDate" prefWidth="150.0"/>
+                </VBox>
+                
+                <VBox spacing="8.0">
+                    <Label text="Sắp xếp theo:">
+                        <font><Font name="System Bold" size="12.0"/></font>
+                    </Label>
+                    <HBox spacing="15.0">
+                        <RadioButton fx:id="rbSortByReturnDate" text="Ngày trả" selected="true">
+                            <font><Font size="12.0"/></font>
+                        </RadioButton>
+                        <RadioButton fx:id="rbSortByPrice" text="Giá thuê">
+                            <font><Font size="12.0"/></font>
+                        </RadioButton>
+                    </HBox>
+                </VBox>
+                
+                <Region HBox.hgrow="ALWAYS"/>
+                
+                <Button fx:id="btnGenerate" onAction="#handleGenerate" styleClass="generate-button" 
+                        text="📊 TẠO BÁO CÁO" prefWidth="150.0" prefHeight="45.0">
+                    <font><Font name="System Bold" size="13.0"/></font>
+                </Button>
+            </HBox>
+        </VBox>
+    </top>
+    
+    <center>
+        <VBox spacing="10.0">
+            <padding>
+                <Insets bottom="15.0" left="20.0" right="20.0" top="10.0"/>
+            </padding>
+            
+            <Label text="Kết quả Báo cáo" styleClass="section-header">
+                <font><Font name="System Bold" size="15.0"/></font>
+            </Label>
+            
+            <TableView fx:id="tblReport" VBox.vgrow="ALWAYS" styleClass="data-table">
+                <columns>
+                    <TableColumn fx:id="colCustomerName" prefWidth="200.0" text="Khách hàng"/>
+                    <TableColumn fx:id="colCarName" prefWidth="200.0" text="Xe thuê"/>
+                    <TableColumn fx:id="colPickupDate" prefWidth="120.0" text="Ngày nhận"/>
+                    <TableColumn fx:id="colReturnDate" prefWidth="120.0" text="Ngày trả"/>
+                    <TableColumn fx:id="colRentPrice" prefWidth="130.0" text="Giá thuê (VND)"/>
+                    <TableColumn fx:id="colStatus" prefWidth="120.0" text="Trạng thái"/>
+                </columns>
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+            </TableView>
+        </VBox>
+    </center>
+    
+    <bottom>
+        <HBox spacing="30.0" alignment="CENTER_LEFT" styleClass="summary-bar">
+            <padding>
+                <Insets bottom="15.0" left="20.0" right="20.0" top="15.0"/>
+            </padding>
+            
+            <Label fx:id="lblTotal" text="Tổng giao dịch: 0" styleClass="summary-label">
+                <font><Font name="System Bold" size="14.0"/></font>
+            </Label>
+            
+            <Label fx:id="lblTotalRevenue" text="Tổng doanh thu: 0 VND" styleClass="summary-label">
+                <font><Font name="System Bold" size="14.0"/></font>
+            </Label>
+        </HBox>
+    </bottom>
+</BorderPane>

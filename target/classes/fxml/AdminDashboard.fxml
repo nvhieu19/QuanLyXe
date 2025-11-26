@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="mainPane" minHeight="700.0" minWidth="1400.0" 
+            xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" 
+            fx:controller="com.fucar.controller.AdminDashboardController">
+    
+    <top>
+        <VBox styleClass="admin-header">
+            <!-- Top Bar -->
+            <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="top-bar">
+                <padding>
+                    <Insets bottom="15.0" left="25.0" right="25.0" top="15.0"/>
+                </padding>
+                
+                <Label styleClass="app-logo" text="🚗">
+                    <font><Font size="28.0"/></font>
+                </Label>
+                
+                <VBox spacing="2.0">
+                    <Label styleClass="app-title" text="FU Car Renting System">
+                        <font><Font name="System Bold" size="18.0"/></font>
+                    </Label>
+                    <Label fx:id="lblWelcome" styleClass="welcome-text" text="Admin Dashboard">
+                        <font><Font size="13.0"/></font>
+                    </Label>
+                </VBox>
+                
+                <Region HBox.hgrow="ALWAYS"/>
+                
+                <Button onAction="#handleLogout" styleClass="logout-button" text="ĐĂNG XUẤT">
+                    <font><Font name="System Bold" size="13.0"/></font>
+                </Button>
+            </HBox>
+            
+            <!-- Navigation Menu -->
+            <HBox spacing="0.0" styleClass="nav-menu">
+                <padding>
+                    <Insets left="25.0" right="25.0"/>
+                </padding>
+                
+                <Button onAction="#loadCarManagement" styleClass="nav-button" text="🚘 Quản lý Xe" prefWidth="180.0">
+                    <font><Font size="14.0" name="System Bold"/></font>
+                </Button>
+                
+                <Button onAction="#loadCustomerManagement" styleClass="nav-button" text="👥 Quản lý Người dùng" prefWidth="200.0">
+                    <font><Font size="14.0" name="System Bold"/></font>
+                </Button>
+                
+                <Button onAction="#loadRentalManagement" styleClass="nav-button" text="📋 Quản lý Giao dịch" prefWidth="200.0">
+                    <font><Font size="14.0" name="System Bold"/></font>
+                </Button>
+                
+                <Button onAction="#loadReport" styleClass="nav-button" text="📊 Báo cáo" prefWidth="180.0">
+                    <font><Font size="14.0" name="System Bold"/></font>
+                </Button>
+            </HBox>
+        </VBox>
+    </top>
+    
+    <center>
+        <!-- Content will be loaded here dynamically -->
+    </center>
+</BorderPane>

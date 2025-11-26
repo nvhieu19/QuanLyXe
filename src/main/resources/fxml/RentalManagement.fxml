@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="650.0" prefWidth="1350.0" styleClass="content-pane"
+            xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" 
+            fx:controller="com.fucar.controller.RentalManagementController">
+    
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="page-header">
+            <padding>
+                <Insets bottom="15.0" left="20.0" right="20.0" top="15.0"/>
+            </padding>
+            
+            <Label styleClass="page-title" text="Quản lý Giao dịch Thuê xe">
+                <font><Font name="System Bold" size="20.0"/></font>
+            </Label>
+            
+            <Region HBox.hgrow="ALWAYS"/>
+            
+            <Button fx:id="btnClear" onAction="#handleClear" styleClass="refresh-button" text="🔄 Làm mới">
+                <font><Font size="13.0"/></font>
+            </Button>
+        </HBox>
+    </top>
+    
+    <center>
+        <SplitPane dividerPositions="0.6" styleClass="split-view">
+            <!-- LEFT: Table View -->
+            <VBox spacing="10.0">
+                <padding>
+                    <Insets bottom="10.0" left="15.0" right="5.0" top="10.0"/>
+                </padding>
+                
+                <Label text="Danh sách Giao dịch" styleClass="section-header">
+                    <font><Font name="System Bold" size="15.0"/></font>
+                </Label>
+                
+                <TableView fx:id="tblRental" VBox.vgrow="ALWAYS" styleClass="data-table">
+                    <columns>
+                        <TableColumn fx:id="colCustomerName" prefWidth="180.0" text="Khách hàng"/>
+                        <TableColumn fx:id="colCarName" prefWidth="180.0" text="Xe thuê"/>
+                        <TableColumn fx:id="colPickupDate" prefWidth="110.0" text="Ngày nhận"/>
+                        <TableColumn fx:id="colReturnDate" prefWidth="110.0" text="Ngày trả"/>
+                        <TableColumn fx:id="colRentPrice" prefWidth="120.0" text="Giá thuê"/>
+                        <TableColumn fx:id="colStatus" prefWidth="120.0" text="Trạng thái"/>
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                    </columnResizePolicy>
+                </TableView>
+            </VBox>
+            
+            <!-- RIGHT: Form View -->
+            <ScrollPane fitToWidth="true" styleClass="form-scroll">
+                <VBox spacing="15.0">
+                    <padding>
+                        <Insets bottom="15.0" left="10.0" right="15.0" top="10.0"/>
+                    </padding>
+                    
+                    <Label text="Thông tin Chi tiết" styleClass="section-header">
+                        <font><Font name="System Bold" size="15.0"/></font>
+                    </Label>
+                    
+                    <!-- Rental Info -->
+                    <VBox spacing="12.0" styleClass="form-section">
+                        <Label text="📋 Thông tin Giao dịch" styleClass="subsection-title">
+                            <font><Font name="System Bold" size="14.0"/></font>
+                        </Label>
+                        
+                        <GridPane hgap="12.0" vgap="12.0">
+                            <Label text="Khách hàng:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                            <ComboBox fx:id="cmbCustomer" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                            
+                            <Label text="Xe thuê:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                            <ComboBox fx:id="cmbCar" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                            
+                            <Label text="Ngày nhận:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                            <DatePicker fx:id="dpPickupDate" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                            
+                            <Label text="Ngày trả:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                            <DatePicker fx:id="dpReturnDate" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                            
+                            <Label text="Giá thuê:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                            <TextField fx:id="txtRentPrice" promptText="VD: 900000" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                            
+                            <Label text="Trạng thái:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                            <ComboBox fx:id="cmbStatus" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                            
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="NEVER" minWidth="110.0"/>
+                                <ColumnConstraints hgrow="ALWAYS"/>
+                            </columnConstraints>
+                        </GridPane>
+                    </VBox>
+                    
+                    <!-- Action Buttons -->
+                    <VBox spacing="10.0">
+                        <padding>
+                            <Insets top="10.0"/>
+                        </padding>
+                        
+                        <HBox spacing="10.0">
+                            <Button fx:id="btnAdd" onAction="#handleAdd" styleClass="btn-success" text="➕ THÊM MỚI" prefWidth="150.0" prefHeight="40.0">
+                                <font><Font name="System Bold" size="13.0"/></font>
+                            </Button>
+                            
+                            <Button fx:id="btnUpdate" onAction="#handleUpdate" styleClass="btn-warning" text="✏️ CẬP NHẬT" prefWidth="150.0" prefHeight="40.0">
+                                <font><Font name="System Bold" size="13.0"/></font>
+                            </Button>
+                        </HBox>
+                        
+                        <HBox spacing="10.0">
+                            <Button fx:id="btnReturn" onAction="#handleReturn" styleClass="btn-info" text="✅ TRẢ XE" prefWidth="150.0" prefHeight="40.0">
+                                <font><Font name="System Bold" size="13.0"/></font>
+                            </Button>
+                            
+                            <Button fx:id="btnDelete" onAction="#handleDelete" styleClass="btn-danger" text="🗑️ XÓA" prefWidth="150.0" prefHeight="40.0">
+                                <font><Font name="System Bold" size="13.0"/></font>
+                            </Button>
+                        </HBox>
+                    </VBox>
+                </VBox>
+            </ScrollPane>
+        </SplitPane>
+    </center>
+</BorderPane>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="650.0" prefWidth="1350.0" styleClass="content-pane"
+            xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" 
+            fx:controller="com.fucar.controller.CustomerManagementController">
+    
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="page-header">
+            <padding>
+                <Insets bottom="15.0" left="20.0" right="20.0" top="15.0"/>
+            </padding>
+            
+            <Label styleClass="page-title" text="Quản lý Người dùng">
+                <font><Font name="System Bold" size="20.0"/></font>
+            </Label>
+            
+            <Region HBox.hgrow="ALWAYS"/>
+            
+            <Button fx:id="btnClear" onAction="#handleClear" styleClass="refresh-button" text="🔄 Làm mới">
+                <font><Font size="13.0"/></font>
+            </Button>
+        </HBox>
+    </top>
+    
+    <center>
+        <SplitPane dividerPositions="0.55" styleClass="split-view">
+            <!-- LEFT: Table View -->
+            <VBox spacing="10.0">
+                <padding>
+                    <Insets bottom="10.0" left="15.0" right="5.0" top="10.0"/>
+                </padding>
+                
+                <Label text="Danh sách Người dùng" styleClass="section-header">
+                    <font><Font name="System Bold" size="15.0"/></font>
+                </Label>
+                
+                <TableView fx:id="tblCustomer" VBox.vgrow="ALWAYS" styleClass="data-table">
+                    <columns>
+                        <TableColumn fx:id="colCustomerId" prefWidth="40.0" text="ID"/>
+                        <TableColumn fx:id="colName" prefWidth="120.0" text="Họ tên"/>
+                        <TableColumn fx:id="colMobile" prefWidth="100.0" text="SĐT"/>
+                        <TableColumn fx:id="colBirthday" prefWidth="90.0" text="Ngày sinh"/>
+                        <TableColumn fx:id="colIdentityCard" prefWidth="100.0" text="CMND"/>
+                        <TableColumn fx:id="colLicence" prefWidth="90.0" text="GPLX"/>
+                        <TableColumn fx:id="colLicenceDate" prefWidth="90.0" text="Ngày cấp"/>
+                        <TableColumn fx:id="colEmail" prefWidth="140.0" text="Email"/>
+                        <TableColumn fx:id="colAccountName" prefWidth="100.0" text="Tài khoản"/>
+                        <TableColumn fx:id="colRole" prefWidth="90.0" text="Chức vụ"/>
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                    </columnResizePolicy>
+                </TableView>
+            </VBox>
+            
+            <!-- RIGHT: Form View -->
+            <ScrollPane fitToWidth="true" styleClass="form-scroll">
+                <VBox spacing="15.0">
+                    <padding>
+                        <Insets bottom="15.0" left="10.0" right="15.0" top="10.0"/>
+                    </padding>
+                    
+                    <Label text="Thông tin Chi tiết" styleClass="section-header">
+                        <font><Font name="System Bold" size="15.0"/></font>
+                    </Label>
+                    
+                    <!-- Customer Info -->
+                    <VBox spacing="12.0" styleClass="form-section">
+                        <Label text="👤 Thông tin Cá nhân" styleClass="subsection-title">
+                            <font><Font name="System Bold" size="14.0"/></font>
+                        </Label>
+                        
+                        <GridPane hgap="12.0" vgap="10.0">
+                            <Label text="Họ và tên:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                            <TextField fx:id="txtCustomerName" promptText="VD: Nguyễn Văn A" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                            
+                            <Label text="Số điện thoại:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                            <TextField fx:id="txtMobile" promptText="VD: 0912345678" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                            
+                            <Label text="Ngày sinh:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                            <DatePicker fx:id="dpBirthday" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                            
+                            <Label text="CMND/CCCD:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                            <TextField fx:id="txtIdentityCard" promptText="VD: 012345678901" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                            
+                            <Label text="Số GPLX:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                            <TextField fx:id="txtLicenceNumber" promptText="VD: B1234567" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                            
+                            <Label text="Ngày cấp GPLX:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                            <DatePicker fx:id="dpLicenceDate" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                            
+                            <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+                            <TextField fx:id="txtEmail" promptText="VD: example@email.com" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+                            
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="NEVER" minWidth="130.0"/>
+                                <ColumnConstraints hgrow="ALWAYS"/>
+                            </columnConstraints>
+                        </GridPane>
+                    </VBox>
+                    
+                    <!-- Account Info -->
+                    <VBox spacing="12.0" styleClass="form-section">
+                        <Label text="🔐 Thông tin Tài khoản" styleClass="subsection-title">
+                            <font><Font name="System Bold" size="14.0"/></font>
+                        </Label>
+                        
+                        <GridPane hgap="12.0" vgap="10.0">
+                            <Label text="Tên đăng nhập:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                            <TextField fx:id="txtAccountName" promptText="VD: user123" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                            
+                            <Label text="Mật khẩu:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                            <PasswordField fx:id="txtPassword" promptText="Tối thiểu 6 ký tự" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                            
+                            <Label text="Phân quyền:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                            <ComboBox fx:id="cmbRole" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                            
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="NEVER" minWidth="130.0"/>
+                                <ColumnConstraints hgrow="ALWAYS"/>
+                            </columnConstraints>
+                        </GridPane>
+                    </VBox>
+                    
+                    <!-- Action Buttons -->
+                    <HBox spacing="10.0" alignment="CENTER_LEFT">
+                        <padding>
+                            <Insets top="10.0"/>
+                        </padding>
+                        
+                        <Button fx:id="btnAdd" onAction="#handleAdd" styleClass="btn-success" text="➕ THÊM MỚI" prefWidth="130.0" prefHeight="40.0">
+                            <font><Font name="System Bold" size="13.0"/></font>
+                        </Button>
+                        
+                        <Button fx:id="btnUpdate" onAction="#handleUpdate" styleClass="btn-warning" text="✏️ CẬP NHẬT" prefWidth="130.0" prefHeight="40.0">
+                            <font><Font name="System Bold" size="13.0"/></font>
+                        </Button>
+                        
+                        <Button fx:id="btnDelete" onAction="#handleDelete" styleClass="btn-danger" text="🗑️ XÓA" prefWidth="130.0" prefHeight="40.0">
+                            <font><Font name="System Bold" size="13.0"/></font>
+                        </Button>
+                    </HBox>
+                </VBox>
+            </ScrollPane>
+        </SplitPane>
+    </center>
+</BorderPane>
