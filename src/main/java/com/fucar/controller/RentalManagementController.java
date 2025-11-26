@@ -12,7 +12,9 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.StringConverter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class RentalManagementController {
     
@@ -60,6 +62,55 @@ public class RentalManagementController {
         btnUpdate.setDisable(true);
         btnReturn.setDisable(true);
         btnDelete.setDisable(true);
+        
+        // --- CẤU HÌNH ĐỊNH DẠNG NGÀY THÁNG (dd/MM/yyyy) ---
+        String pattern = "dd/MM/yyyy";
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+
+        // 1. Định dạng cho các DatePicker (Ô nhập ngày)
+        StringConverter<LocalDate> dateConverter = new StringConverter<LocalDate>() {
+            @Override
+            public String toString(LocalDate date) {
+                return (date != null) ? dateFormatter.format(date) : "";
+            }
+
+            @Override
+            public LocalDate fromString(String string) {
+                if (string != null && !string.isEmpty()) {
+                    try {
+                        return LocalDate.parse(string, dateFormatter);
+                    } catch (Exception e) {
+                        return null;
+                    }
+                }
+                return null;
+            }
+        };
+
+        // Áp dụng cho Ngày nhận
+        dpPickupDate.setConverter(dateConverter);
+        dpPickupDate.setPromptText(pattern.toLowerCase());
+
+        // Áp dụng cho Ngày trả
+        dpReturnDate.setConverter(dateConverter);
+        dpReturnDate.setPromptText(pattern.toLowerCase());
+
+        // 2. Định dạng cho các TableColumn (Cột ngày trong bảng)
+        javafx.util.Callback<TableColumn<CarRental, LocalDate>, TableCell<CarRental, LocalDate>> cellFactory = column -> new TableCell<CarRental, LocalDate>() {
+            @Override
+            protected void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                if (empty || date == null) {
+                    setText(null);
+                } else {
+                    setText(dateFormatter.format(date));
+                }
+            }
+        };
+
+        colPickupDate.setCellFactory(cellFactory);
+        colReturnDate.setCellFactory(cellFactory);
+        // ---------------------------------------------------
         
         tblRental.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {

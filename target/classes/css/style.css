@@ -602,3 +602,194 @@
     -fx-border-width: 2px;
     -fx-text-fill: -fx-text-light;
 }
+
+/* ========================================
+   Car Management Header Styling
+   ======================================== */
+.page-header-title {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 28px;
+}
+
+.btn-secondary-light {
+    -fx-background-color: -fx-surface;
+    -fx-text-fill: -fx-text-light;
+    -fx-border-color: -fx-border;
+    -fx-border-width: 1px;
+    -fx-background-radius: 6px;
+    -fx-border-radius: 6px;
+    -fx-padding: 8px 16px;
+    -fx-cursor: hand;
+}
+
+.btn-secondary-light:hover {
+    -fx-background-color: -fx-surface-hover;
+    -fx-text-fill: -fx-text;
+    -fx-border-color: -fx-primary;
+}
+
+.search-field {
+    -fx-background-color: -fx-surface;
+    -fx-border-color: -fx-border;
+    -fx-border-width: 1px;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-padding: 8px 12px;
+    -fx-font-size: 12px;
+}
+
+.search-field:focused {
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(59, 130, 246, 0.2), 6, 0, 0, 0);
+}
+
+.filter-combo {
+    -fx-background-color: -fx-surface;
+    -fx-border-color: -fx-border;
+    -fx-border-width: 1px;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-padding: 8px 12px;
+    -fx-font-size: 12px;
+}
+
+.filter-combo:focused {
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(59, 130, 246, 0.2), 6, 0, 0, 0);
+}
+
+.btn-primary {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: white;
+    -fx-background-radius: 6px;
+    -fx-border-radius: 6px;
+    -fx-padding: 8px 16px;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+.btn-primary:hover {
+    -fx-background-color: -fx-primary-dark;
+    -fx-effect: dropshadow(gaussian, -fx-shadow-strong, 8, 0, 0, 3);
+}
+
+/* ========================================
+   Tab Pane Styling
+   ======================================== */
+.data-tab-pane .tab-pane {
+    -fx-padding: 0;
+}
+
+.data-tab-pane .tab {
+    -fx-padding: 12px 25px;
+    -fx-background-color: -fx-surface;
+    -fx-border-color: -fx-border;
+    -fx-border-width: 0 0 2 0;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-text-light;
+}
+
+.data-tab-pane .tab:selected {
+    -fx-background-color: -fx-surface;
+    -fx-border-color: -fx-primary;
+    -fx-text-fill: -fx-primary;
+}
+
+.data-tab-pane .tab:hover {
+    -fx-background-color: -fx-surface-hover;
+    -fx-text-fill: -fx-text;
+}
+
+.data-tab-pane .tab-header-background {
+    -fx-background-color: -fx-surface;
+}
+
+/* ========================================
+   Form Input Styling
+   ======================================== */
+.form-input {
+    -fx-background-color: -fx-surface;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-padding: 8px 12px;
+    -fx-font-size: 12px;
+}
+
+.form-input:focused {
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(59, 130, 246, 0.2), 6, 0, 0, 0);
+}
+
+.form-label {
+    -fx-text-fill: -fx-text;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+}
+
+.form-combo {
+    -fx-background-color: -fx-surface;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-padding: 8px 12px;
+    -fx-font-size: 12px;
+}
+
+.form-combo:focused {
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(59, 130, 246, 0.2), 6, 0, 0, 0);
+}
+
+.form-textarea {
+    -fx-background-color: -fx-surface;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-padding: 8px 12px;
+    -fx-font-size: 12px;
+    -fx-control-inner-background: -fx-surface;
+}
+
+.form-textarea:focused {
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(59, 130, 246, 0.2), 6, 0, 0, 0);
+}
+
+/* ========================================
+   Form Card Styling
+   ======================================== */
+.form-card {
+    -fx-background-color: -fx-surface;
+    -fx-background-radius: 8px;
+    -fx-padding: 20px;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 8, 0, 0, 1);
+}
+
+/* ========================================
+   Info Labels
+   ======================================== */
+.info-label {
+    -fx-text-fill: -fx-text-light;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+
+.info-value {
+    -fx-text-fill: -fx-primary;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}

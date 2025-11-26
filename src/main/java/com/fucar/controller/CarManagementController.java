@@ -10,7 +10,9 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.StringConverter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class CarManagementController {
@@ -61,6 +63,48 @@ public class CarManagementController {
         
         btnUpdate.setDisable(true);
         btnDelete.setDisable(true);
+        
+        // --- CẤU HÌNH ĐỊNH DẠNG NGÀY THÁNG (dd/MM/yyyy) ---
+        String pattern = "dd/MM/yyyy";
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+
+        // 1. Định dạng cho DatePicker (Ô nhập ngày)
+        dpImportDate.setConverter(new StringConverter<LocalDate>() {
+            @Override
+            public String toString(LocalDate date) {
+                if (date != null) {
+                    return dateFormatter.format(date);
+                }
+                return "";
+            }
+
+            @Override
+            public LocalDate fromString(String string) {
+                if (string != null && !string.isEmpty()) {
+                    try {
+                        return LocalDate.parse(string, dateFormatter);
+                    } catch (Exception e) {
+                        return null;
+                    }
+                }
+                return null;
+            }
+        });
+        dpImportDate.setPromptText(pattern.toLowerCase()); // Gợi ý: dd/mm/yyyy
+
+        // 2. Định dạng cho TableColumn (Cột ngày trong bảng)
+        colImportDate.setCellFactory(column -> new TableCell<Car, LocalDate>() {
+            @Override
+            protected void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                if (empty || date == null) {
+                    setText(null);
+                } else {
+                    setText(dateFormatter.format(date));
+                }
+            }
+        });
+        // ---------------------------------------------------
         
         tblCar.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
