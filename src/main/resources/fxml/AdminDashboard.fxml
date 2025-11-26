@@ -2,60 +2,87 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainPane" minHeight="700.0" minWidth="1400.0" styleClass="admin-dashboard"
+<BorderPane fx:id="mainPane" minHeight="700.0" minWidth="1400.0" style="-fx-background-color: #f4f6f9;"
             xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.fucar.controller.AdminDashboardController">
 
-    <!-- Left Side Navigation Menu -->
     <left>
-        <VBox prefWidth="250.0" style="-fx-background-color: #2c3e50;" styleClass="side-menu" spacing="10">
+        <VBox prefWidth="260.0" spacing="15"
+              style="-fx-background-color: linear-gradient(to bottom right, #2c3e50, #3498db);">
+            
             <padding>
-                <Insets top="20" right="10" bottom="20" left="10"/>
+                <Insets top="30" right="15" bottom="30" left="15"/>
             </padding>
 
-            <!-- App Logo and Title -->
-            <VBox alignment="CENTER" spacing="10.0" styleClass="side-menu-header">
-                <Label text="🚗" styleClass="app-logo-side">
-                    <font><Font size="40.0"/></font>
+            <VBox alignment="CENTER" spacing="5.0">
+                <Label text="🚗" textFill="WHITE">
+                    <font><Font size="45.0"/></font>
+                    <effect>
+                        <DropShadow color="#00000033" radius="10" offsetY="3"/>
+                    </effect>
                 </Label>
-                <Label text="FU Car Renting" style="-fx-text-fill: #ecf0f1;" styleClass="app-title-side">
-                    <font><Font name="System Bold" size="18.0"/></font>
+                <Label text="FU Car Renting" textFill="WHITE">
+                    <font><Font name="System Bold" size="20.0"/></font>
+                    <effect>
+                        <DropShadow color="#00000033" radius="5" offsetY="2"/>
+                    </effect>
+                </Label>
+                <Label text="Admin Portal" textFill="#a8ddfd">
+                    <font><Font size="12.0"/></font>
                 </Label>
             </VBox>
 
-            <Separator prefWidth="200.0"/>
+            <Separator prefWidth="200.0" style="-fx-opacity: 0.3; -fx-background-color: white;"/>
 
-            <!-- Navigation Buttons -->
-            <VBox spacing="10.0" VBox.vgrow="NEVER">
-                <Button onAction="#loadCarManagement" text="🚘 Quản lý Xe" maxWidth="Infinity" styleClass="nav-button"/>
-                <Button onAction="#loadCustomerManagement" text="👥 Quản lý Người dùng" maxWidth="Infinity" styleClass="nav-button"/>
-                <Button onAction="#loadRentalManagement" text="📋 Quản lý Giao dịch" maxWidth="Infinity" styleClass="nav-button"/>
-                <Button onAction="#loadReport" text="📊 Báo cáo" maxWidth="Infinity" styleClass="nav-button"/>
+            <VBox spacing="12.0" VBox.vgrow="NEVER">
+                <Button onAction="#loadCarManagement" text="🚘  Quản lý Xe" maxWidth="Infinity" alignment="BASELINE_LEFT"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 15px; -fx-cursor: hand; -fx-padding: 10 20; -fx-background-radius: 10; -fx-border-radius: 10;"/>
+                
+                <Button onAction="#loadCustomerManagement" text="👥  Quản lý Người dùng" maxWidth="Infinity" alignment="BASELINE_LEFT"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 15px; -fx-cursor: hand; -fx-padding: 10 20; -fx-background-radius: 10; -fx-border-radius: 10;"/>
+                
+                <Button onAction="#loadRentalManagement" text="📋  Quản lý Giao dịch" maxWidth="Infinity" alignment="BASELINE_LEFT"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 15px; -fx-cursor: hand; -fx-padding: 10 20; -fx-background-radius: 10; -fx-border-radius: 10;"/>
+                
+                <Button onAction="#loadReport" text="📊  Báo cáo &amp; Thống kê" maxWidth="Infinity" alignment="BASELINE_LEFT"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 15px; -fx-cursor: hand; -fx-padding: 10 20; -fx-background-radius: 10; -fx-border-radius: 10;"/>
             </VBox>
 
-            <!-- Spacer -->
             <Region VBox.vgrow="ALWAYS"/>
 
-            <!-- User Info and Logout -->
-            <VBox alignment="CENTER" spacing="10.0" styleClass="side-menu-footer" stylesheets="@../css/styles.css">
-                <Separator prefWidth="200.0"/>
-                <Label fx:id="lblWelcome" text="Welcome, Admin" style="-fx-text-fill: #bdc3c7;" styleClass="welcome-text">
-                    <font><Font size="13.0"/></font>
-                </Label>
-                <Button onAction="#handleLogout" text="ĐĂNG XUẤT" maxWidth="Infinity" styleClass="logout-button">
+            <VBox alignment="CENTER" spacing="15.0">
+                <Separator prefWidth="200.0" style="-fx-opacity: 0.3; -fx-background-color: white;"/>
+                
+                <HBox alignment="CENTER" spacing="10">
+                    <Label text="👤" textFill="WHITE"><font><Font size="18.0"/></font></Label>
+                    <VBox>
+                        <Label fx:id="lblWelcome" text="Welcome, Admin" textFill="WHITE">
+                            <font><Font name="System Bold" size="14.0"/></font>
+                        </Label>
+                        <Label text="System Administrator" textFill="#bdc3c7">
+                            <font><Font size="11.0"/></font>
+                        </Label>
+                    </VBox>
+                </HBox>
+                
+                <Button onAction="#handleLogout" text="ĐĂNG XUẤT" maxWidth="Infinity" 
+                        style="-fx-background-color: #ff4757; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 30; -fx-cursor: hand; -fx-padding: 10;">
                     <font><Font name="System Bold" size="13.0"/></font>
+                    <effect>
+                        <DropShadow color="#00000033" radius="5" offsetY="3"/>
+                    </effect>
                 </Button>
             </VBox>
         </VBox>
     </left>
 
     <center>
-        <!-- Content will be loaded here dynamically -->
         <StackPane style="-fx-background-color: #f4f6f9;" styleClass="content-pane">
-            <Label text="Chào mừng đến với Bảng điều khiển Quản trị!" style="-fx-text-fill: #7f8c8d;" styleClass="placeholder-text">
+            <Label text="Chào mừng đến với Bảng điều khiển Quản trị!" textFill="#7f8c8d">
                 <font>
                     <Font name="System Italic" size="24.0"/>
                 </font>

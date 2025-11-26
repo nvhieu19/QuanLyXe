@@ -8,9 +8,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 
@@ -47,6 +51,36 @@ public class ReportController {
         setupTable();
         setupSortGroup();
         btnExport.setDisable(true);
+        
+        // --- CẤU HÌNH ĐỊNH DẠNG NGÀY THÁNG (dd/MM/yyyy) CHO DATEPICKER ---
+        String pattern = "dd/MM/yyyy";
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+
+        StringConverter<LocalDate> dateConverter = new StringConverter<LocalDate>() {
+            @Override
+            public String toString(LocalDate date) {
+                return (date != null) ? dateFormatter.format(date) : "";
+            }
+
+            @Override
+            public LocalDate fromString(String string) {
+                if (string != null && !string.isEmpty()) {
+                    try {
+                        return LocalDate.parse(string, dateFormatter);
+                    } catch (Exception e) {
+                        return null;
+                    }
+                }
+                return null;
+            }
+        };
+
+        dpStartDate.setConverter(dateConverter);
+        dpStartDate.setPromptText(pattern.toLowerCase());
+        
+        dpEndDate.setConverter(dateConverter);
+        dpEndDate.setPromptText(pattern.toLowerCase());
+        // ---------------------------------------------------------------
     }
     
     private void setupTable() {
@@ -56,8 +90,29 @@ public class ReportController {
         colCarName.setCellValueFactory(cellData -> 
             new javafx.beans.property.SimpleStringProperty(
                 cellData.getValue().getCar().getCarName()));
+        
+        // --- ĐỊNH DẠNG NGÀY THÁNG TRONG BẢNG (dd/MM/yyyy) ---
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        
+        Callback<TableColumn<CarRental, LocalDate>, TableCell<CarRental, LocalDate>> cellFactory = column -> new TableCell<CarRental, LocalDate>() {
+            @Override
+            protected void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                if (empty || date == null) {
+                    setText(null);
+                } else {
+                    setText(dateFormatter.format(date));
+                }
+            }
+        };
+
         colPickupDate.setCellValueFactory(new PropertyValueFactory<>("pickupDate"));
+        colPickupDate.setCellFactory(cellFactory);
+        
         colReturnDate.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
+        colReturnDate.setCellFactory(cellFactory);
+        // -------------------------------------------------------
+
         colRentPrice.setCellValueFactory(new PropertyValueFactory<>("rentPrice"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
     }
@@ -143,13 +198,16 @@ public class ReportController {
             // Write header
             writer.write("Customer Name,Car Name,Pickup Date,Return Date,Rent Price,Status\n");
             
+            // Định dạng ngày khi xuất file luôn cho đẹp
+            DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
             // Write data
             for (CarRental rental : reportData) {
                 writer.write(String.format("%s,%s,%s,%s,%.2f,%s\n",
                     rental.getCustomer().getCustomerName(),
                     rental.getCar().getCarName(),
-                    rental.getPickupDate(),
-                    rental.getReturnDate(),
+                    df.format(rental.getPickupDate()), // Format ngày
+                    df.format(rental.getReturnDate()), // Format ngày
                     rental.getRentPrice(),
                     rental.getStatus()
                 ));

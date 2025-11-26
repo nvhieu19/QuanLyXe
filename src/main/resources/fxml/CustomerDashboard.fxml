@@ -2,186 +2,182 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="700.0" minWidth="1200.0" 
+<BorderPane prefHeight="700.0" prefWidth="1200.0" 
             xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" 
             fx:controller="com.fucar.controller.CustomerDashboardController">
-    
-    <top>
-        <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="customer-header">
+
+    <left>
+        <VBox prefWidth="260.0" spacing="15"
+              style="-fx-background-color: linear-gradient(to bottom right, #2c3e50, #3498db);">
+            
             <padding>
-                <Insets bottom="20.0" left="25.0" right="25.0" top="20.0"/>
+                <Insets top="30" right="15" bottom="30" left="15"/>
             </padding>
-            
-            <Label styleClass="app-logo" text="🚗">
-                <font><Font size="28.0"/></font>
-            </Label>
-            
-            <VBox spacing="3.0">
-                <Label fx:id="lblWelcome" styleClass="customer-welcome" text="Welcome, Customer">
-                    <font><Font name="System Bold" size="20.0"/></font>
+
+            <VBox alignment="CENTER" spacing="5.0">
+                <Label text="🚗" textFill="WHITE">
+                    <font><Font size="45.0"/></font>
+                    <effect>
+                        <DropShadow color="#00000033" radius="10" offsetY="3"/>
+                    </effect>
                 </Label>
-                <Label text="Hệ thống Quản lý Thuê xe" styleClass="customer-subtitle">
-                    <font><Font size="13.0"/></font>
+                <Label text="FU Car Renting" textFill="WHITE">
+                    <font><Font name="System Bold" size="20.0"/></font>
+                    <effect>
+                        <DropShadow color="#00000033" radius="5" offsetY="2"/>
+                    </effect>
+                </Label>
+                <Label text="Customer Portal" textFill="#a8ddfd">
+                    <font><Font size="12.0"/></font>
                 </Label>
             </VBox>
-            
-            <Region HBox.hgrow="ALWAYS"/>
-            
-            <Button fx:id="btnLogout" onAction="#handleLogout" styleClass="logout-button" text="ĐĂNG XUẤT">
-                <font><Font name="System Bold" size="13.0"/></font>
-            </Button>
-        </HBox>
-    </top>
-    
+
+            <Separator prefWidth="200.0" style="-fx-opacity: 0.3; -fx-background-color: white;"/>
+
+            <VBox spacing="12.0" VBox.vgrow="NEVER">
+                <Button onAction="#showProfile" text="👤  Hồ sơ Cá nhân" maxWidth="Infinity" alignment="BASELINE_LEFT"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 15px; -fx-cursor: hand; -fx-padding: 10 20; -fx-background-radius: 10;"/>
+                
+                <Button onAction="#showAccount" text="🔐  Tài khoản" maxWidth="Infinity" alignment="BASELINE_LEFT"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 15px; -fx-cursor: hand; -fx-padding: 10 20; -fx-background-radius: 10;"/>
+                
+                <Button onAction="#showHistory" text="📜  Lịch sử Thuê xe" maxWidth="Infinity" alignment="BASELINE_LEFT"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 15px; -fx-cursor: hand; -fx-padding: 10 20; -fx-background-radius: 10;"/>
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <VBox alignment="CENTER" spacing="15.0">
+                <Separator prefWidth="200.0" style="-fx-opacity: 0.3; -fx-background-color: white;"/>
+                
+                <HBox alignment="CENTER" spacing="10">
+                    <Label text="👤" textFill="WHITE"><font><Font size="18.0"/></font></Label>
+                    <VBox>
+                        <Label fx:id="lblWelcome" text="Welcome" textFill="WHITE">
+                            <font><Font name="System Bold" size="14.0"/></font>
+                        </Label>
+                        <Label text="Customer" textFill="#bdc3c7">
+                            <font><Font size="11.0"/></font>
+                        </Label>
+                    </VBox>
+                </HBox>
+                
+                <Button fx:id="btnLogout" onAction="#handleLogout" text="ĐĂNG XUẤT" maxWidth="Infinity"
+                        style="-fx-background-color: #ff4757; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 30; -fx-cursor: hand; -fx-padding: 10;">
+                    <font><Font name="System Bold" size="13.0"/></font>
+                    <effect>
+                        <DropShadow color="#00000033" radius="5" offsetY="3"/>
+                    </effect>
+                </Button>
+            </VBox>
+        </VBox>
+    </left>
+
     <center>
-        <TabPane tabClosingPolicy="UNAVAILABLE" styleClass="customer-tabs">
-            <!-- Profile Tab -->
-            <Tab text="👤 Hồ sơ Cá nhân">
-                <ScrollPane fitToWidth="true" styleClass="tab-scroll">
-                    <VBox spacing="20.0">
-                        <padding>
-                            <Insets bottom="25.0" left="30.0" right="30.0" top="25.0"/>
-                        </padding>
-                        
-                        <VBox spacing="15.0" styleClass="customer-section">
-                            <Label text="Thông tin Cá nhân" styleClass="customer-section-title">
-                                <font><Font name="System Bold" size="16.0"/></font>
-                            </Label>
-                            
-                            <GridPane hgap="20.0" vgap="15.0">
-                                <Label text="Họ và tên:" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                                    <font><Font size="13.0"/></font>
-                                </Label>
-                                <TextField fx:id="txtCustomerName" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                                
-                                <Label text="Số điện thoại:" GridPane.columnIndex="2" GridPane.rowIndex="0">
-                                    <font><Font size="13.0"/></font>
-                                </Label>
-                                <TextField fx:id="txtMobile" prefWidth="300.0" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
-                                
-                                <Label text="Ngày sinh:" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                                    <font><Font size="13.0"/></font>
-                                </Label>
-                                <DatePicker fx:id="dpBirthday" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                                
-                                <Label text="CMND/CCCD:" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                    <font><Font size="13.0"/></font>
-                                </Label>
-                                <TextField fx:id="txtIdentityCard" prefWidth="300.0" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
-                                
-                                <Label text="Số GPLX:" GridPane.columnIndex="0" GridPane.rowIndex="2">
-                                    <font><Font size="13.0"/></font>
-                                </Label>
-                                <TextField fx:id="txtLicenceNumber" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                                
-                                <Label text="Ngày cấp GPLX:" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                                    <font><Font size="13.0"/></font>
-                                </Label>
-                                <DatePicker fx:id="dpLicenceDate" prefWidth="300.0" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
-                                
-                                <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="3">
-                                    <font><Font size="13.0"/></font>
-                                </Label>
-                                <TextField fx:id="txtEmail" prefWidth="300.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="3"/>
-                                
-                                <columnConstraints>
-                                    <ColumnConstraints hgrow="NEVER" minWidth="130.0"/>
-                                    <ColumnConstraints hgrow="ALWAYS"/>
-                                    <ColumnConstraints hgrow="NEVER" minWidth="130.0"/>
-                                    <ColumnConstraints hgrow="ALWAYS"/>
-                                </columnConstraints>
-                            </GridPane>
-                            
-                            <HBox>
-                                <Button fx:id="btnUpdateProfile" onAction="#handleUpdateProfile" 
-                                        styleClass="btn-success" text="💾 CẬP NHẬT THÔNG TIN" prefWidth="200.0" prefHeight="45.0">
-                                    <font><Font name="System Bold" size="13.0"/></font>
-                                </Button>
-                            </HBox>
-                        </VBox>
-                    </VBox>
-                </ScrollPane>
-            </Tab>
+        <StackPane style="-fx-background-color: #f4f6f9; -fx-padding: 20;">
             
-            <!-- Account Tab -->
-            <Tab text="🔐 Tài khoản">
-                <ScrollPane fitToWidth="true" styleClass="tab-scroll">
-                    <VBox spacing="20.0">
-                        <padding>
-                            <Insets bottom="25.0" left="30.0" right="30.0" top="25.0"/>
-                        </padding>
-                        
-                        <VBox spacing="15.0" styleClass="customer-section">
-                            <Label text="Thông tin Đăng nhập" styleClass="customer-section-title">
-                                <font><Font name="System Bold" size="16.0"/></font>
-                            </Label>
-                            
-                            <GridPane hgap="20.0" vgap="15.0">
-                                <Label text="Tên đăng nhập:" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                                    <font><Font size="13.0"/></font>
-                                </Label>
-                                <TextField fx:id="txtAccountName" editable="false" prefWidth="400.0" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                                
-                                <columnConstraints>
-                                    <ColumnConstraints hgrow="NEVER" minWidth="150.0"/>
-                                    <ColumnConstraints hgrow="ALWAYS"/>
-                                </columnConstraints>
-                            </GridPane>
-                        </VBox>
-                        
-                        <VBox spacing="15.0" styleClass="customer-section">
-                            <Label text="Đổi Mật khẩu" styleClass="customer-section-title">
-                                <font><Font name="System Bold" size="16.0"/></font>
-                            </Label>
-                            
-                            <GridPane hgap="20.0" vgap="15.0">
-                                <Label text="Mật khẩu cũ:" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                                    <font><Font size="13.0"/></font>
-                                </Label>
-                                <PasswordField fx:id="txtOldPassword" promptText="Nhập mật khẩu hiện tại" prefWidth="400.0" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                                
-                                <Label text="Mật khẩu mới:" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                                    <font><Font size="13.0"/></font>
-                                </Label>
-                                <PasswordField fx:id="txtNewPassword" promptText="Nhập mật khẩu mới (tối thiểu 6 ký tự)" prefWidth="400.0" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                                
-                                <Label text="Xác nhận mật khẩu:" GridPane.columnIndex="0" GridPane.rowIndex="2">
-                                    <font><Font size="13.0"/></font>
-                                </Label>
-                                <PasswordField fx:id="txtConfirmPassword" promptText="Nhập lại mật khẩu mới" prefWidth="400.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                                
-                                <columnConstraints>
-                                    <ColumnConstraints hgrow="NEVER" minWidth="150.0"/>
-                                    <ColumnConstraints hgrow="ALWAYS"/>
-                                </columnConstraints>
-                            </GridPane>
-                            
-                            <HBox>
-                                <Button fx:id="btnUpdateAccount" onAction="#handleUpdateAccount" 
-                                        styleClass="btn-warning" text="🔑 ĐỔI MẬT KHẨU" prefWidth="200.0" prefHeight="45.0">
-                                    <font><Font name="System Bold" size="13.0"/></font>
-                                </Button>
-                            </HBox>
-                        </VBox>
-                    </VBox>
-                </ScrollPane>
-            </Tab>
-            
-            <!-- Rental History Tab -->
-            <Tab text="📜 Lịch sử Thuê xe">
-                <VBox spacing="15.0">
-                    <padding>
-                        <Insets bottom="20.0" left="25.0" right="25.0" top="20.0"/>
-                    </padding>
+            <VBox fx:id="viewProfile" spacing="20.0">
+                <Label text="Hồ sơ Cá nhân" textFill="#2c3e50">
+                    <font><Font name="System Bold" size="24.0"/></font>
+                </Label>
+                
+                <VBox spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 25;">
+                    <effect><DropShadow radius="10.0" offsetY="2.0" color="#0000001a"/></effect>
                     
-                    <Label text="Danh sách Giao dịch" styleClass="customer-section-title">
+                    <Label text="Thông tin chi tiết" textFill="#34495e">
                         <font><Font name="System Bold" size="16.0"/></font>
                     </Label>
                     
-                    <TableView fx:id="tblRentalHistory" VBox.vgrow="ALWAYS" styleClass="data-table">
+                    <GridPane hgap="20.0" vgap="15.0">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="NEVER" minWidth="120.0"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                            <ColumnConstraints hgrow="NEVER" minWidth="120.0"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                        </columnConstraints>
+
+                        <Label text="Họ và tên:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <TextField fx:id="txtCustomerName" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #f9fafb; -fx-border-color: #e5e7eb;" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        
+                        <Label text="Số điện thoại:" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                        <TextField fx:id="txtMobile" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #f9fafb; -fx-border-color: #e5e7eb;" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+                        
+                        <Label text="Ngày sinh:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <DatePicker fx:id="dpBirthday" maxWidth="Infinity" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #f9fafb;" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        
+                        <Label text="CMND/CCCD:" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                        <TextField fx:id="txtIdentityCard" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #f9fafb; -fx-border-color: #e5e7eb;" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+                        
+                        <Label text="Số GPLX:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <TextField fx:id="txtLicenceNumber" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #f9fafb; -fx-border-color: #e5e7eb;" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        
+                        <Label text="Ngày cấp GPLX:" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                        <DatePicker fx:id="dpLicenceDate" maxWidth="Infinity" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #f9fafb;" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+                        
+                        <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <TextField fx:id="txtEmail" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #f9fafb; -fx-border-color: #e5e7eb;" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="3"/>
+                    </GridPane>
+                    
+                    <HBox alignment="CENTER_RIGHT">
+                        <Button fx:id="btnUpdateProfile" onAction="#handleUpdateProfile" 
+                                styleClass="btn-success" text="💾 CẬP NHẬT" prefWidth="150.0" prefHeight="40.0"
+                                style="-fx-background-radius: 20; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+
+            <VBox fx:id="viewAccount" spacing="20.0" visible="false">
+                <Label text="Quản lý Tài khoản" textFill="#2c3e50">
+                    <font><Font name="System Bold" size="24.0"/></font>
+                </Label>
+                
+                <VBox spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 25;">
+                    <effect><DropShadow radius="10.0" offsetY="2.0" color="#0000001a"/></effect>
+                    
+                    <Label text="Đổi mật khẩu" textFill="#34495e">
+                        <font><Font name="System Bold" size="16.0"/></font>
+                    </Label>
+                    
+                    <GridPane hgap="20.0" vgap="15.0">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="NEVER" minWidth="150.0"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                        </columnConstraints>
+
+                        <Label text="Tên đăng nhập:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtAccountName" editable="false" style="-fx-background-color: #f1f2f6; -fx-background-radius: 10;" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                        
+                        <Label text="Mật khẩu cũ:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <PasswordField fx:id="txtOldPassword" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #f9fafb; -fx-border-color: #e5e7eb;" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                        
+                        <Label text="Mật khẩu mới:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <PasswordField fx:id="txtNewPassword" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #f9fafb; -fx-border-color: #e5e7eb;" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                        
+                        <Label text="Xác nhận:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <PasswordField fx:id="txtConfirmPassword" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #f9fafb; -fx-border-color: #e5e7eb;" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                    </GridPane>
+                    
+                    <HBox alignment="CENTER_RIGHT">
+                        <Button fx:id="btnUpdateAccount" onAction="#handleUpdateAccount" 
+                                styleClass="btn-warning" text="🔑 ĐỔI MẬT KHẨU" prefWidth="150.0" prefHeight="40.0"
+                                style="-fx-background-radius: 20; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+
+            <VBox fx:id="viewHistory" spacing="20.0" visible="false">
+                <Label text="Lịch sử Thuê xe" textFill="#2c3e50">
+                    <font><Font name="System Bold" size="24.0"/></font>
+                </Label>
+                
+                <VBox VBox.vgrow="ALWAYS" style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 15;">
+                    <effect><DropShadow radius="10.0" offsetY="2.0" color="#0000001a"/></effect>
+                    
+                    <TableView fx:id="tblRentalHistory" VBox.vgrow="ALWAYS" styleClass="data-table" style="-fx-background-radius: 10; -fx-border-radius: 10;">
                         <columns>
                             <TableColumn fx:id="colCarName" prefWidth="300.0" text="Tên Xe"/>
                             <TableColumn fx:id="colPickupDate" prefWidth="150.0" text="Ngày nhận"/>
@@ -194,7 +190,8 @@
                         </columnResizePolicy>
                     </TableView>
                 </VBox>
-            </Tab>
-        </TabPane>
+            </VBox>
+
+        </StackPane>
     </center>
 </BorderPane>

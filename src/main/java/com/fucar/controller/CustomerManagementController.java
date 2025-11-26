@@ -10,7 +10,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class CustomerManagementController {
     
@@ -63,6 +66,53 @@ public class CustomerManagementController {
         btnUpdate.setDisable(true);
         btnDelete.setDisable(true);
         
+        // --- CẤU HÌNH ĐỊNH DẠNG NGÀY THÁNG (dd/MM/yyyy) ---
+        String pattern = "dd/MM/yyyy";
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+
+        // 1. Định dạng cho DatePicker (Ô nhập ngày)
+        StringConverter<LocalDate> dateConverter = new StringConverter<LocalDate>() {
+            @Override
+            public String toString(LocalDate date) {
+                return (date != null) ? dateFormatter.format(date) : "";
+            }
+
+            @Override
+            public LocalDate fromString(String string) {
+                if (string != null && !string.isEmpty()) {
+                    try {
+                        return LocalDate.parse(string, dateFormatter);
+                    } catch (Exception e) {
+                        return null;
+                    }
+                }
+                return null;
+            }
+        };
+
+        dpBirthday.setConverter(dateConverter);
+        dpBirthday.setPromptText(pattern.toLowerCase());
+        
+        dpLicenceDate.setConverter(dateConverter);
+        dpLicenceDate.setPromptText(pattern.toLowerCase());
+
+        // 2. Định dạng cho TableColumn (Cột ngày trong bảng)
+        Callback<TableColumn<Customer, LocalDate>, TableCell<Customer, LocalDate>> cellFactory = column -> new TableCell<Customer, LocalDate>() {
+            @Override
+            protected void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                if (empty || date == null) {
+                    setText(null);
+                } else {
+                    setText(dateFormatter.format(date));
+                }
+            }
+        };
+
+        colBirthday.setCellFactory(cellFactory);
+        colLicenceDate.setCellFactory(cellFactory);
+        // ---------------------------------------------------
+        
         tblCustomer.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
                 selectCustomer(newVal);
@@ -79,9 +129,11 @@ public class CustomerManagementController {
         colLicence.setCellValueFactory(new PropertyValueFactory<>("licenceNumber"));
         colLicenceDate.setCellValueFactory(new PropertyValueFactory<>("licenceDate"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        
         colAccountName.setCellValueFactory(cellData -> 
             new javafx.beans.property.SimpleStringProperty(
                 cellData.getValue().getAccount().getAccountName()));
+        
         colRole.setCellValueFactory(cellData -> 
             new javafx.beans.property.SimpleStringProperty(
                 cellData.getValue().getAccount().getRole().toString()));
