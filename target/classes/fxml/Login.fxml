@@ -61,7 +61,7 @@
         </Button>
         
         <VBox alignment="CENTER" spacing="8.0" styleClass="demo-info">
-            <Label text="📌 Tài khoản demo:" styleClass="demo-title">
+            <!-- <Label text="📌 Tài khoản demo:" styleClass="demo-title">
                 <font><Font name="System Bold" size="13.0"/></font>
             </Label>
             <Label text="Admin: admin01 / admin123" styleClass="demo-text">
@@ -69,7 +69,7 @@
             </Label>
             <Label text="Customer: customer01 / cust123" styleClass="demo-text">
                 <font><Font size="12.0"/></font>
-            </Label>
+            </Label> -->
         </VBox>
     </VBox>
 </StackPane>

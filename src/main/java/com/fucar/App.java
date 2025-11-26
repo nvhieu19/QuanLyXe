@@ -28,7 +28,7 @@ public class App extends Application {
         Scene scene = new Scene(root, 900, 600);
         String css = getClass().getResource("/css/style.css").toExternalForm();
         scene.getStylesheets().add(css);
-        
+        //aa
         primaryStage.setTitle("FU Car Renting System");
         primaryStage.setScene(scene);
         primaryStage.setMinWidth(900);
